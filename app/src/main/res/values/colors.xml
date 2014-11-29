@@ -3,6 +3,7 @@
     <item name="blue" type="color">#ff2625b3</item>
     <item name="dark_blue" type="color">#ff232292</item>
     <item name="bt1_primary" type="color">#ffb7b8b6</item>
+    <item name="my_accent" type="color">#ffb7b8b6</item>
     <item name="bt1_primary_pressed" type="color">#ff8b8c8a</item>
     <item name="bt1_ripple" type="color">#40000000</item>
 </resources>

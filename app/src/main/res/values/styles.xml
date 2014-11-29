@@ -6,6 +6,7 @@
         <item name="searchViewStyle">@style/MySearchViewStyle</item>
         <item name="colorPrimary">@color/dark_blue</item>
         <item name="colorPrimaryDark">@color/blue</item>
+        <item name="colorAccent">@color/my_accent</item>
         <item name="android:windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="android:textColor">@android:color/black</item>

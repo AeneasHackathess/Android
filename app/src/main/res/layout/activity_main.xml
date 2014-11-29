@@ -33,6 +33,8 @@
                 fab:fab_colorRipple="@color/bt1_ripple" />
         </FrameLayout>
         <ListView
+            android:id="@+id/left_drawer"
+            android:paddingTop="50dp"
             android:layout_width="240dp"
             android:layout_height="match_parent"
             android:layout_gravity="start"
