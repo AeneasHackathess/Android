@@ -148,7 +148,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 startActivity(new Intent(this, PreferenceActivity.class));
                 break;
             case 1:
-
+                startActivity(new Intent(this, AboutActivity.class));
                 break;
             default:
                 break;

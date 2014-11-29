@@ -13,5 +13,8 @@
     <string name="username_pref">Username</string>
     <string name="username_sum">Add the username you used to register on the Web server</string>
     <string name="preferences_activity">Settings</string>
+    <string name="aboutText">Aeneas is a platform developed during the competition Hackathess, Hackathon for Thessaloniki, Greece.</string>
+    <string name="logo">Logo</string>
+    <string name="aboutFooter">Developed by Meerkat</string>
 
 </resources>

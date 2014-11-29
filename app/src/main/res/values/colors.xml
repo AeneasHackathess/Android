@@ -8,4 +8,13 @@
     <item name="bt1_ripple" type="color">#40000000</item>
     <item name="checking" type="color">#ff208014</item>
     <item name="danger" type="color">#ff801917</item>
+    <color name="yellow1">#ff3ff93f</color>
+    <color name="yellow2">#ff7ff978</color>
+    <color name="orange4">#F7BE45</color>
+    <color name="orange5">#F7D896</color>
+    <color name="blue2">#19FCDA</color>
+    <color name="blue25">#D9F7F2</color>
+    <color name="grey05">#ACA899</color>
+    <color name="white1">#FFFFFF</color>
+    <color name="white2">#DDDDDD</color>
 </resources>
