@@ -14,6 +14,15 @@ public class AeneasApplication extends Application {
     private final static String prefsLat = "mLat";
     private final static String prefsMove = "mMove";
     private final static String prefsStatus = "mStatus";
+    private static String pressedCheck = "0";
+
+    public static void setPressedCheck(String check){
+        pressedCheck = check;
+    }
+
+    public static String getPressedCheck() {
+        return pressedCheck;
+    }
 
     public String getStatus() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);

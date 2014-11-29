@@ -49,8 +49,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     private TextView mPulseRate,mStateView;
     private FloatingActionButton button;
     private AeneasApplication mApplication;
-    private ImageView mapIcon;
-//    private ServerUtils serverUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,10 +62,16 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         mDrawerActions = new String[]{getResources().getString(R.string.conn_settings),getResources().getString(R.string.about_info)};
         initializeUI();
         mPulseRate = (TextView) findViewById(R.id.pulse_rate_info);
-        mPulseRate.setText(mApplication.getPulse());
         mStateView = (TextView) findViewById(R.id.reason_info);
-        mStateView.setText(mApplication.getStatus());
         registerReceiver(uiUpdated, new IntentFilter("EVERYTHING_UPDATED"));
+        mPulseRate.setText(mApplication.getPulse());
+        if (mApplication.getStatus().equals("check")){
+            mStateView.setText("Check");
+            mStateView.setTextColor(getResources().getColor(R.color.checking));
+        }else{
+            mStateView.setText("Danger");
+            mStateView.setTextColor(getResources().getColor(R.color.danger));
+        }
     }
 
     public void clickEvent(View v){
@@ -76,6 +80,12 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                     Uri.parse("geo:"+mApplication.getLat()+","+mApplication.getLong()+"?q="+mApplication.getLat()+","+mApplication.getLong()+"("+mApplication.getStatus()+")"));
             startActivity(intent);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(uiUpdated);
     }
 
     private void initializeUI() {
@@ -215,6 +225,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         Log.d(TAG,"OnClick");
         if (v.getId() == R.id.fab){
             Log.d(TAG, "Fab pressed");
+            mApplication.setPressedCheck("1");
         }
     }
 
@@ -238,6 +249,13 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         public void onReceive(Context context, Intent intent) {
             Log.d(TAG,"ONRECEIVE");
             mPulseRate.setText(mApplication.getPulse());
+            if (mApplication.getStatus().equals("check")){
+                mStateView.setText("Check");
+                mStateView.setTextColor(getResources().getColor(R.color.checking));
+            }else{
+                mStateView.setText("Danger");
+                mStateView.setTextColor(getResources().getColor(R.color.danger));
+            }
         }
     };
 }

@@ -6,4 +6,6 @@
     <item name="my_accent" type="color">#ffb7b8b6</item>
     <item name="bt1_primary_pressed" type="color">#ff8b8c8a</item>
     <item name="bt1_ripple" type="color">#40000000</item>
+    <item name="checking" type="color">#ff208014</item>
+    <item name="danger" type="color">#ff801917</item>
 </resources>

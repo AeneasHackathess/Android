@@ -31,13 +31,13 @@
                 android:weightSum="2"
                 android:layout_height="@dimen/abc_action_bar_default_height_material">
                 <ImageView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:src="@drawable/ic_pulse_rate"
                     android:id="@+id/pulse_rate_text"
                     android:layout_weight="1"
                     android:layout_height="match_parent" />
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:text="93"
                     android:layout_weight="1"
                     android:id="@+id/pulse_rate_info"
@@ -55,17 +55,17 @@
                 android:weightSum="2"
                 android:layout_height="@dimen/abc_action_bar_default_height_material">
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:src="@drawable/ic_pulse_rate"
-                    android:id="@+id/map_location_text"
+                    android:layout_width="match_parent"
+                    android:src="@drawable/ic_time"
+                    android:id="@+id/movement_text"
                     android:layout_weight="1"
                     android:layout_height="match_parent" />
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:text="93"
+                    android:layout_width="match_parent"
+                    android:text="12/11/1993Z 23:23:23T"
                     android:layout_weight="1"
+                    android:id="@+id/movement_info"
                     android:textSize="16sp"
-                    android:id="@+id/map_location_info"
                     android:gravity="center"
                     android:layout_height="match_parent" />
             </LinearLayout>
@@ -79,37 +79,13 @@
                 android:weightSum="2"
                 android:layout_height="@dimen/abc_action_bar_default_height_material">
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:src="@drawable/ic_pulse_rate"
-                    android:id="@+id/movement_text"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:text="93"
-                    android:layout_weight="1"
-                    android:id="@+id/movement_info"
-                    android:textSize="16sp"
-                    android:gravity="center"
-                    android:layout_height="match_parent" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:id="@+id/rel_4"
-                android:layout_below="@id/rel_3"
-                android:layout_centerHorizontal="true"
-                android:paddingRight="50dp"
-                android:paddingLeft="50dp"
-                android:weightSum="2"
-                android:layout_height="@dimen/abc_action_bar_default_height_material">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:src="@drawable/ic_pulse_rate"
+                    android:layout_width="match_parent"
+                    android:src="@drawable/ic_question_mark"
                     android:id="@+id/reason_text"
                     android:layout_weight="1"
                     android:layout_height="match_parent" />
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:text="93"
                     android:layout_weight="1"
                     android:textSize="16sp"
@@ -117,6 +93,15 @@
                     android:gravity="center"
                     android:layout_height="match_parent" />
             </LinearLayout>
+            <ImageView
+                android:src="@drawable/ic_map_icon"
+                android:textColor="@android:color/white"
+                android:layout_width="wrap_content"
+                android:id="@+id/map_location_info"
+                android:onClick="clickEvent"
+                android:layout_below="@id/rel_3"
+                android:layout_centerHorizontal="true"
+                android:layout_height="64dp" />
             <com.melnykov.fab.FloatingActionButton
                 android:id="@+id/fab"
                 android:layout_width="wrap_content"

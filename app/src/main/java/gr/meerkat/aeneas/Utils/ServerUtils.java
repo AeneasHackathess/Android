@@ -13,6 +13,7 @@ import com.koushikdutta.async.future.Future;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
+import gr.meerkat.aeneas.AeneasApplication;
 import gr.meerkat.aeneas.CommunicationService;
 
 /**
@@ -43,14 +44,14 @@ public class ServerUtils {
         if (loading != null && !loading.isDone() && !loading.isCancelled())
             return;
         loading = Ion.with(context)
-                .load(String.format("http://83.212.100.212/Aeneas/android?username=%s&check=1", Uri.encode(username)))
+                .load(String.format("http://83.212.100.212/Aeneas/android?username=%s&check=%s", Uri.encode(sharedPreferences.getString(prefsUsername,"")),Uri.encode(AeneasApplication.getPressedCheck())))
                 .addHeader("Accept", "application/json")
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
                     public void onCompleted(Exception e, JsonObject result) {
                         Log.d("SERVER", "completed");
-                        Log.d("SERVER",String.format("http://83.212.100.212/Aeneas/android?username=%s&check=1", Uri.encode(sharedPreferences.getString(prefsUsername,""))));
+                        Log.d("SERVER",String.format("http://83.212.100.212/Aeneas/android?username=%s&check=%s", Uri.encode(sharedPreferences.getString(prefsUsername,"")),Uri.encode(AeneasApplication.getPressedCheck())));
                         try {
                             if (e != null)
                                 throw e;
@@ -64,6 +65,7 @@ public class ServerUtils {
                             updateStatus(lat,lng,"0",state,pulse);
                             Log.d("SERVER",responses.get("pulse").getAsString());
                             ((CommunicationService) context).broadcastToMain();
+                            AeneasApplication.setPressedCheck("0");
 //                            Log.d("SERVER", results.get("pulse").getAsString());
 
 // fragment.readyToShow();
