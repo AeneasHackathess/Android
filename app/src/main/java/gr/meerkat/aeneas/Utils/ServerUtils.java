@@ -65,6 +65,9 @@ public class ServerUtils {
                             updateStatus(lat,lng,"0",state,pulse);
                             Log.d("SERVER",responses.get("pulse").getAsString());
                             ((CommunicationService) context).broadcastToMain();
+                            if (!state.equals("check")){
+                                ((CommunicationService) context).prepareNotification();
+                            }
                             AeneasApplication.setPressedCheck("0");
 //                            Log.d("SERVER", results.get("pulse").getAsString());
 

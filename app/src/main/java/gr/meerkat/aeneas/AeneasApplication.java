@@ -29,6 +29,11 @@ public class AeneasApplication extends Application {
         return sharedPreferences.getString(prefsStatus, "Check");
     }
 
+    public String getMove() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        return sharedPreferences.getString(prefsMove, "");
+    }
+
     public String getPulse() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         return sharedPreferences.getString(prefsPulseRate, "80");

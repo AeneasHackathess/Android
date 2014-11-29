@@ -55,15 +55,16 @@ public class CommunicationService extends Service{
         sendBroadcast(i);
     }
 
-    private void prepareNotification(){
+    public void prepareNotification(){
+        AeneasApplication mApplication = (AeneasApplication) getApplication();
         Intent intent = new Intent(this, MainActivity.class);
         PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
 // build notification
 // the addAction re-use the same intent to keep the example short
         Notification n  = new Notification.Builder(this)
-                .setContentTitle("New mail from " + "test@gmail.com")
-                .setContentText("Subject")
+                .setContentTitle("Risk sent!")
+                .setContentText("Pulse Rate: "+mApplication.getPulse()+"\nLast Movement: "+mApplication.getMove())
                 .setSmallIcon(R.drawable.ic_launcher)
                 .setContentIntent(pIntent)
                 .setAutoCancel(true).getNotification();
