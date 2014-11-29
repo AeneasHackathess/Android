@@ -2,8 +2,10 @@ package gr.meerkat.aeneas;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
@@ -44,6 +46,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     private ArrayList<PackageItem> mItem;
     private CharSequence mDrawerTitle;
     private String[] mDrawerActions;
+    private TextView mPulseRate,mStateView;
     private FloatingActionButton button;
     private AeneasApplication mApplication;
     private ImageView mapIcon;
@@ -60,6 +63,11 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         mDrawerActions = new String[]{getResources().getString(R.string.conn_settings),getResources().getString(R.string.about_info)};
         initializeUI();
+        mPulseRate = (TextView) findViewById(R.id.pulse_rate_info);
+        mPulseRate.setText(mApplication.getPulse());
+        mStateView = (TextView) findViewById(R.id.reason_info);
+        mStateView.setText(mApplication.getStatus());
+        registerReceiver(uiUpdated, new IntentFilter("EVERYTHING_UPDATED"));
     }
 
     public void clickEvent(View v){
@@ -223,4 +231,13 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         AlarmManager alarm = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         alarm.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 5*1000, pintent);
     }
+
+    private BroadcastReceiver uiUpdated= new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.d(TAG,"ONRECEIVE");
+            mPulseRate.setText(mApplication.getPulse());
+        }
+    };
 }

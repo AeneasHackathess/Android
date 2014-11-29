@@ -42,10 +42,17 @@ public class CommunicationService extends Service{
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        username = sharedPreferences.getString("mUsername","");
         Log.d(TAG, "Service start "+username);
         serverUtils.loadDecisions();
 //        prepareNotification();
         return super.onStartCommand(intent, flags, startId);
+    }
+
+    public void broadcastToMain(){
+        Intent i = new Intent("EVERYTHING_UPDATED");
+        sendBroadcast(i);
     }
 
     private void prepareNotification(){
@@ -72,8 +79,6 @@ public class CommunicationService extends Service{
     public void onCreate() {
         serverUtils = new ServerUtils(this);
         notify = true;
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        username = sharedPreferences.getString("mUsername","");
         Log.d(TAG, "Service got created :"+username);
     }
 }
