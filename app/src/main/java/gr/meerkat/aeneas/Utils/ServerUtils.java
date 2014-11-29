@@ -19,6 +19,11 @@ public class ServerUtils {
     private Future<JsonObject> loading;
     private Context context;
     private final static String prefsUsername = "mUsername";
+    private final static String prefsPulseRate = "mPulseRate";
+    private final static String prefsLong = "mLong";
+    private final static String prefsLat = "mLat";
+    private final static String prefsMove = "mMove";
+    private final static String prefsStatus = "mStatus";
     public ServerUtils(Context context) {
         this.context = context;
     }
@@ -58,16 +63,22 @@ public class ServerUtils {
                 });
     }
     /**
-     * Function that covers user's login
+     * Function that updates status
      *
-     * @param username User's username
-     * @return True if login was successful, false otherwise
+     *
      */
-    public boolean login(String username) {
+    public void updateStatus(String lat,String lon,String move,String status,String pulse) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(prefsUsername, username);
+        editor.putString(prefsStatus, status);
         editor.apply();
-        return true;
+        editor.putString(prefsLat, lat);
+        editor.apply();
+        editor.putString(prefsLong, lon);
+        editor.apply();
+        editor.putString(prefsMove, move);
+        editor.apply();
+        editor.putString(prefsPulseRate, pulse);
+        editor.apply();
     }
 }

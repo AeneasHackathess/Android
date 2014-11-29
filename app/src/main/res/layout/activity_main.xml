@@ -14,16 +14,116 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar"
+        android:clickable="false"
         tools:context=".MainActivity">
-        <FrameLayout
+        <RelativeLayout
             android:id="@+id/content_frame"
             android:layout_width="match_parent"
+            android:padding="25dp"
+            android:clickable="false"
             android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:id="@+id/rel_1"
+                android:layout_centerHorizontal="true"
+                android:paddingRight="50dp"
+                android:paddingLeft="50dp"
+                android:weightSum="2"
+                android:layout_height="@dimen/abc_action_bar_default_height_material">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/ic_pulse_rate"
+                    android:id="@+id/pulse_rate_text"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="93"
+                    android:layout_weight="1"
+                    android:id="@+id/pulse_rate_info"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:layout_height="match_parent" />
+                </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:id="@+id/rel_2"
+                android:layout_below="@id/rel_1"
+                android:layout_centerHorizontal="true"
+                android:paddingRight="50dp"
+                android:paddingLeft="50dp"
+                android:weightSum="2"
+                android:layout_height="@dimen/abc_action_bar_default_height_material">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/ic_pulse_rate"
+                    android:id="@+id/map_location_text"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="93"
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    android:id="@+id/map_location_info"
+                    android:gravity="center"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:id="@+id/rel_3"
+                android:layout_below="@id/rel_2"
+                android:layout_centerHorizontal="true"
+                android:paddingRight="50dp"
+                android:paddingLeft="50dp"
+                android:weightSum="2"
+                android:layout_height="@dimen/abc_action_bar_default_height_material">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/ic_pulse_rate"
+                    android:id="@+id/movement_text"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="93"
+                    android:layout_weight="1"
+                    android:id="@+id/movement_info"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:id="@+id/rel_4"
+                android:layout_below="@id/rel_3"
+                android:layout_centerHorizontal="true"
+                android:paddingRight="50dp"
+                android:paddingLeft="50dp"
+                android:weightSum="2"
+                android:layout_height="@dimen/abc_action_bar_default_height_material">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/ic_pulse_rate"
+                    android:id="@+id/reason_text"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="93"
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    android:id="@+id/reason_info"
+                    android:gravity="center"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
             <com.melnykov.fab.FloatingActionButton
                 android:id="@+id/fab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|right"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="bottom"
                 android:layout_margin="16dp"
                 android:src="@drawable/check_up"
                 fab:elevation="5dp"
@@ -31,7 +131,7 @@
                 fab:fab_colorNormal="@color/bt1_primary"
                 fab:fab_colorPressed="@color/bt1_primary_pressed"
                 fab:fab_colorRipple="@color/bt1_ripple" />
-        </FrameLayout>
+        </RelativeLayout>
         <ListView
             android:id="@+id/left_drawer"
             android:paddingTop="50dp"

@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.*;
@@ -15,11 +16,15 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
 
@@ -29,7 +34,7 @@ import gr.meerkat.aeneas.Utils.PackageAdapter;
 import gr.meerkat.aeneas.Utils.PackageItem;
 
 
-public class MainActivity extends ActionBarActivity implements View.OnClickListener {
+public class MainActivity extends ActionBarActivity implements View.OnClickListener{
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private ActionBarDrawerToggle actionBarDrawerToggle;
@@ -41,6 +46,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     private String[] mDrawerActions;
     private FloatingActionButton button;
     private AeneasApplication mApplication;
+    private ImageView mapIcon;
 //    private ServerUtils serverUtils;
 
     @Override
@@ -54,6 +60,14 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         mDrawerActions = new String[]{getResources().getString(R.string.conn_settings),getResources().getString(R.string.about_info)};
         initializeUI();
+    }
+
+    public void clickEvent(View v){
+        if (v.getId() == R.id.map_location_info){
+            Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                    Uri.parse("geo:"+mApplication.getLat()+","+mApplication.getLong()+"?q="+mApplication.getLat()+","+mApplication.getLong()+"("+mApplication.getStatus()+")"));
+            startActivity(intent);
+        }
     }
 
     private void initializeUI() {
@@ -121,6 +135,18 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         }
     }
 
+//    @Override
+//    public boolean onTouch(View v, MotionEvent event) {
+//        Log.d(TAG,"onTouch");
+//        if (v.getId() == R.id.gps_location_info){
+//            Log.d(TAG, "Map pressed");
+//            Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+//                    Uri.parse("http://maps.google.com/maps?&daddr=22.5666,44.345"));
+//            startActivity(intent);
+//        }
+//        return true;
+//    }
+
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView parent, View view, int position, long id) {
@@ -178,8 +204,10 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        Log.d(TAG, "Fab pressed");
-
+        Log.d(TAG,"OnClick");
+        if (v.getId() == R.id.fab){
+            Log.d(TAG, "Fab pressed");
+        }
     }
 
     private void stopMyService(){
