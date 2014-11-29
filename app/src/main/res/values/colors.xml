@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="blue" type="color">#ff1bbb9a</item>
+    <item name="dark_blue" type="color">#ff1d9272</item>
+    <item name="bt1_primary" type="color">#ff922f2e</item>
+    <item name="bt1_primary_pressed" type="color">#ff722e2d</item>
+    <item name="bt1_ripple" type="color">#40000000</item>
+</resources>
