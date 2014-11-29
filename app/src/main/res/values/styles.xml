@@ -22,5 +22,9 @@
         <item name="color">@android:color/white</item>
     </style>
     <style name="AppTheme.Dialog" parent="android:Theme.Holo.Light.Dialog"/>
+    <style name="Widget.Toolbar" parent="@style/Widget.AppCompat.Toolbar">
+        <item name="android:background">@color/dark_blue</item>
+        <item name="navigationIcon">?attr/homeAsUpIndicator</item>
+    </style>
 
 </resources>

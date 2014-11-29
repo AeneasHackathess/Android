@@ -1,8 +1,10 @@
 package gr.meerkat.aeneas;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.*;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -101,10 +103,24 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         mDrawerList.setItemChecked(0, true);
     }
 
+    private void selectItem(int position){
+        switch (position) {
+            case 0:
+                startActivity(new Intent(this, PreferenceActivity.class));
+                break;
+            case 1:
+
+                break;
+            default:
+                break;
+        }
+    }
+
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView parent, View view, int position, long id) {
             Log.d(TAG,"DrawerClicked");
+            selectItem(position);
         }
     }
 

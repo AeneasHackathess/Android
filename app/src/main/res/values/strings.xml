@@ -9,5 +9,9 @@
     <string name="close">Close</string>
     <string name="conn_settings">Settings</string>
     <string name="about_info">About</string>
+    <string name="general_settings_cat">Settings</string>
+    <string name="username_pref">Username</string>
+    <string name="username_sum">Add the username you used to register on the Web server</string>
+    <string name="preferences_activity">Settings</string>
 
 </resources>
