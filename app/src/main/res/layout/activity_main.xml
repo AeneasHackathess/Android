@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|right"
                 android:layout_margin="16dp"
-                android:src="@drawable/direction"
+                android:src="@drawable/check_up"
                 fab:elevation="5dp"
                 fab:fab_shadow="true"
                 fab:fab_colorNormal="@color/bt1_primary"
