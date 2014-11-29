@@ -8,6 +8,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.List;
+
+import gr.meerkat.aeneas.R;
+
 /**
  * Created by w00dh3n on 29/11/2014.
  */
@@ -30,14 +33,7 @@ public class PackageAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return position;
     }
-    // @Override
-// public boolean isEnabled(int position) {
-// if (position == 2) {
-// return false;
-// } else {
-// return true;
-// }
-// }
+
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         final PackageItem item = getItem(position);

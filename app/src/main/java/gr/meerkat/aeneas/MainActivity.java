@@ -20,6 +20,7 @@ import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 
+import gr.meerkat.aeneas.Utils.PackageAdapter;
 import gr.meerkat.aeneas.Utils.PackageItem;
 
 
@@ -32,7 +33,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     private CharSequence mTitle;
     private ArrayList<PackageItem> mItem;
     private CharSequence mDrawerTitle;
-    private String[] mDrawerActions = new String[]{getResources().getString(R.string.conn_settings),getResources().getString(R.string.about_info)};
+    private String[] mDrawerActions;
     private FloatingActionButton button;
 //    private ServerUtils serverUtils;
 
@@ -44,6 +45,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mDrawerActions = new String[]{getResources().getString(R.string.conn_settings),getResources().getString(R.string.about_info)};
         initializeUI();
     }
 
