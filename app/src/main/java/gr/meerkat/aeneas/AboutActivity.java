@@ -25,7 +25,7 @@ public class AboutActivity extends ActionBarActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
     }
     public void onOpenTwitterClick(View view) {
-        openBrowser("http://forum.xda-developers.com/showthread.php?t=2405849");
+        openBrowser("https://twitter.com/meerkat_team");
     }
     private void openBrowser(String url) {
         startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse(url)));
