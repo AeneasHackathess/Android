@@ -46,7 +46,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     private ArrayList<PackageItem> mItem;
     private CharSequence mDrawerTitle;
     private String[] mDrawerActions;
-    private TextView mPulseRate,mStateView;
+    private TextView mPulseRate,mStateView,mMoveView;
     private FloatingActionButton button;
     private AeneasApplication mApplication;
 
@@ -63,8 +63,10 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         initializeUI();
         mPulseRate = (TextView) findViewById(R.id.pulse_rate_info);
         mStateView = (TextView) findViewById(R.id.reason_info);
+        mMoveView = (TextView) findViewById(R.id.movement_info);
         registerReceiver(uiUpdated, new IntentFilter("EVERYTHING_UPDATED"));
         mPulseRate.setText(mApplication.getPulse());
+        mMoveView.setText(mApplication.getMove());
         if (mApplication.getStatus().equals("check")){
             mStateView.setText("Check");
             mStateView.setTextColor(getResources().getColor(R.color.checking));
@@ -249,6 +251,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         public void onReceive(Context context, Intent intent) {
             Log.d(TAG,"ONRECEIVE");
             mPulseRate.setText(mApplication.getPulse());
+            mMoveView.setText(mApplication.getMove());
             if (mApplication.getStatus().equals("check")){
                 mStateView.setText("Check");
                 mStateView.setTextColor(getResources().getColor(R.color.checking));

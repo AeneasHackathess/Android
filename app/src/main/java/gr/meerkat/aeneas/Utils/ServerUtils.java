@@ -61,9 +61,13 @@ public class ServerUtils {
                             String pulse = responses.get("pulse").getAsString();
                             String lat = responses.get("lat").getAsString();
                             String lng = responses.get("lng").getAsString();
+                            String mov = responses.get("move").getAsString();
+                            String[] separated = mov.split("T");
+                            String date = separated[0];
+                            String time = separated[1].split("Z")[0];
                             String state = responses.get("state").getAsString();
-                            updateStatus(lat,lng,"0",state,pulse);
-                            Log.d("SERVER",responses.get("pulse").getAsString());
+                            updateStatus(lat,lng,date+"\n"+time,state,pulse);
+                            Log.d("SERVER",responses.get("move").getAsString());
                             ((CommunicationService) context).broadcastToMain();
                             if (!state.equals("check")){
                                 ((CommunicationService) context).prepareNotification();
