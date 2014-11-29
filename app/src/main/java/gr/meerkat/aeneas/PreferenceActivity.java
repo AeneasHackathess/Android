@@ -1,6 +1,9 @@
 package gr.meerkat.aeneas;
 
 import android.os.Bundle;
+import android.preference.PreferenceFragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,34 +13,33 @@ import android.widget.LinearLayout;
 /**
  * Created by w00dh3n on 29/11/2014.
  */
-public class PreferenceActivity extends android.preference.PreferenceActivity {
+public class PreferenceActivity extends ActionBarActivity {
 
-    private Toolbar mActionBar;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.preferences);
-        mActionBar.setTitle(getTitle());
-
+        setContentView(R.layout.settings_activity);
+        // Display the fragment as the main content.
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content_wrapper, new SettingsFragment())
+                .commit();
+        toolbar = (Toolbar) findViewById(R.id.action_bar_settings);
+        // use action bar here
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+        }
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
     }
 
-    @Override
-    public void setContentView(int layoutResID) {
-        ViewGroup contentView = (ViewGroup) LayoutInflater.from(this).inflate(
-                R.layout.settings_activity, new LinearLayout(this), false);
-
-        mActionBar = (Toolbar) contentView.findViewById(R.id.action_bar);
-        mActionBar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
-        ViewGroup contentWrapper = (ViewGroup) contentView.findViewById(R.id.content_wrapper);
-        LayoutInflater.from(this).inflate(layoutResID, contentWrapper, true);
-
-        getWindow().setContentView(contentView);
+    public static class SettingsFragment extends gr.meerkat.aeneas.Utils.PreferenceFragment {
+        @Override
+        public void onCreate(Bundle paramBundle) {
+            super.onCreate(paramBundle);
+            addPreferencesFromResource(R.xml.preferences);
+        }
     }
+
 }

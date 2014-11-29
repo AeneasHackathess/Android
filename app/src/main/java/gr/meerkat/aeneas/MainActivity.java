@@ -1,5 +1,8 @@
 package gr.meerkat.aeneas;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
@@ -37,6 +40,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     private CharSequence mDrawerTitle;
     private String[] mDrawerActions;
     private FloatingActionButton button;
+    private AeneasApplication mApplication;
 //    private ServerUtils serverUtils;
 
     @Override
@@ -46,6 +50,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             getWindow().setStatusBarColor(getResources().getColor(R.color.dark_blue));
         }
         super.onCreate(savedInstanceState);
+        mApplication = (AeneasApplication) getApplication();
         setContentView(R.layout.activity_main);
         mDrawerActions = new String[]{getResources().getString(R.string.conn_settings),getResources().getString(R.string.about_info)};
         initializeUI();
@@ -137,7 +142,13 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 // Inflate the menu; this adds items to the action bar if it is present.
-// getMenuInflater().inflate(R.menu.main, menu);
+    getMenuInflater().inflate(R.menu.menu_main, menu);
+        if (mApplication.isRunning()){
+            menu.findItem(R.id.service_running_button).setTitle("Disable");
+        }else{
+            menu.findItem(R.id.service_running_button).setTitle("Enable");
+        }
+
         return true;
     }
     @Override
@@ -146,6 +157,19 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 // automatically handle clicks on the Home/Up button, so long
 // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        if (id == R.id.service_running_button){
+            Log.d(TAG,"service button");
+            if (mApplication.isRunning()){
+                item.setTitle("Enable");
+                mApplication.setRunning(false);
+                stopMyService();
+
+            }else{
+                item.setTitle("Disable");
+                mApplication.setRunning(true);
+                startMyService();
+            }
+        }
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
@@ -155,5 +179,20 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         Log.d(TAG, "Fab pressed");
+
+    }
+
+    private void stopMyService(){
+        Intent intent = new Intent(MainActivity.this, CommunicationService.class);
+        PendingIntent pintent = PendingIntent.getService(MainActivity.this, 0, intent, 0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.cancel(pintent);
+    }
+
+    private void startMyService(){
+        Intent intent = new Intent(MainActivity.this, CommunicationService.class);
+        PendingIntent pintent = PendingIntent.getService(MainActivity.this, 0, intent, 0);
+        AlarmManager alarm = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        alarm.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 5*1000, pintent);
     }
 }
