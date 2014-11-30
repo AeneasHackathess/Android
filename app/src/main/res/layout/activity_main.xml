@@ -103,6 +103,15 @@
                 android:layout_below="@id/rel_3"
                 android:layout_centerHorizontal="true"
                 android:layout_height="64dp" />
+            <TextView
+                android:textColor="@android:color/black"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:id="@+id/nearby_places"
+                android:onClick="clickEvent"
+                android:layout_below="@id/map_location_info"
+                android:layout_centerHorizontal="true"
+                android:layout_height="wrap_content" />
             <com.melnykov.fab.FloatingActionButton
                 android:id="@+id/fab"
                 android:layout_width="wrap_content"

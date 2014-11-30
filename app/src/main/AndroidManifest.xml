@@ -16,6 +16,7 @@
         android:theme="@style/MyTheme" >
         <activity
             android:name="gr.meerkat.aeneas.MainActivity"
+            android:screenOrientation="portrait"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,6 +25,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".AboutActivity"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity">
         <!-- Parent activity meta-data to support 4.0 and lower -->
         <meta-data
@@ -32,6 +34,7 @@
         </activity>
         <activity android:name="gr.meerkat.aeneas.PreferenceActivity"
             android:label="@string/preferences_activity"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity">
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data

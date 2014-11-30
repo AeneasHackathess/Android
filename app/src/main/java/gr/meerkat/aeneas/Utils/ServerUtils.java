@@ -13,6 +13,12 @@ import com.koushikdutta.async.future.Future;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
+
 import gr.meerkat.aeneas.AeneasApplication;
 import gr.meerkat.aeneas.CommunicationService;
 
@@ -28,6 +34,7 @@ public class ServerUtils {
     private final static String prefsLat = "mLat";
     private final static String prefsMove = "mMove";
     private final static String prefsStatus = "mStatus";
+    private final static String prefsNearby = "mNearby";
     public ServerUtils(Context context) {
         this.context = context;
     }
@@ -62,12 +69,26 @@ public class ServerUtils {
                             String lat = responses.get("lat").getAsString();
                             String lng = responses.get("lng").getAsString();
                             String mov = responses.get("move").getAsString();
-                            String[] separated = mov.split("T");
-                            String date = separated[0];
-                            String time = separated[1].split("Z")[0];
+                            SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+                            format.setTimeZone(TimeZone.getTimeZone("Greece/Athens"));
+                            Date date = format.parse(mov);
+                            SimpleDateFormat format2 = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+                            String movDate = format2.format(date);
+                            Log.d("SERVER", "completed");
                             String state = responses.get("state").getAsString();
-                            updateStatus(lat,lng,date+"\n"+time,state,pulse);
-                            Log.d("SERVER",responses.get("move").getAsString());
+                            String nearby = responses.get("nearby").getAsString();
+                            String[] places = nearby.split("_");
+                            Log.d("SERVER",places[0]);
+                            nearby = "";
+                            for (String place : places){
+                                Log.d("SERVER",place);
+                                nearby = nearby.concat(place.split("!")[0]);
+                                nearby = nearby.concat(" "+place.split("!")[1]);
+                                nearby = nearby.concat(" <PHONE>");
+                                nearby = nearby.concat(" <NAME>\n");
+                            }
+                            Log.d("SERVER",nearby);
+                            updateStatus(lat,lng,movDate,state,pulse,nearby);
                             ((CommunicationService) context).broadcastToMain();
                             if (!state.equals("check")){
                                 ((CommunicationService) context).prepareNotification();
@@ -77,7 +98,7 @@ public class ServerUtils {
 
 // fragment.readyToShow();
                         } catch (Exception ex) {
-                            Log.d("SERVER", "EERRRR" + ex.toString());
+                            Log.d("SERVER",ex.toString());
                         }
                     }
                 });
@@ -87,7 +108,7 @@ public class ServerUtils {
      *
      *
      */
-    public void updateStatus(String lat,String lon,String move,String status,String pulse) {
+    public void updateStatus(String lat,String lon,String move,String status,String pulse,String nearby) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(prefsStatus, status);
@@ -99,6 +120,8 @@ public class ServerUtils {
         editor.putString(prefsMove, move);
         editor.apply();
         editor.putString(prefsPulseRate, pulse);
+        editor.apply();
+        editor.putString(prefsNearby, nearby);
         editor.apply();
     }
 }

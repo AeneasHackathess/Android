@@ -15,6 +15,12 @@ public class AeneasApplication extends Application {
     private final static String prefsMove = "mMove";
     private final static String prefsStatus = "mStatus";
     private static String pressedCheck = "0";
+    private final static String prefsNearby = "mNearby";
+
+    public String getNearby(){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        return sharedPreferences.getString(prefsNearby, "No Nearby");
+    }
 
     public static void setPressedCheck(String check){
         pressedCheck = check;
